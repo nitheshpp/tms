@@ -2,23 +2,71 @@ package tms.controller;
 
 import java.util.List;
 
+
+
+
 import javax.websocket.server.PathParam;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import tms.dao.TaskListUserRepository;
+import tms.exception.ResourceNotFoundException;
 import tms.model.CResultListItems;
 import tms.model.CResultTaskListUser;
 import tms.model.TaskListItems;
 import tms.model.TaskListUser;
+import tms.service.TmsServiceInterface;
+
 
 @RestController
 public class TMSController {
+	
+	@Autowired
+	private TmsServiceInterface s;
+	
+	
+	
+	@GetMapping("/getUser")
+	public CResultTaskListUser getUser(@RequestParam("x") long id)
+	{
+		
+		 CResultTaskListUser x = s.getUser(id);
+		return x;
+	}
+	
+	
+	
+   @PutMapping("/addUser")
+	
+	public CResultTaskListUser addEditUser(@RequestBody TaskListUser c){
+	   System.out.println("inside add");
+	   CResultTaskListUser x = s.addUser(c);
+		return x;
+	}
+   
+   @PutMapping("/updateUser")
+	public CResultTaskListUser editUser(@RequestBody TaskListUser u){
+		
+	   System.out.println("inside update");
+	   CResultTaskListUser x = s.updateUser(u);
+		return x;
+	}
+   
+   @PutMapping("/createTask")
+	public CResultListItems CreateTask(@RequestBody TaskListItems c){
+	   System.out.println("inside create");
+	   CResultListItems x=s.createTask(c);
+		return x;
+	}
+	
 	/******************************************************* nithesh **********************************************/
 	
 	/*Login*/
@@ -27,32 +75,32 @@ public class TMSController {
 	/*viewTask*/
 	
 	
-	@GetMapping("/viewTask1")
-	public CResultListItems fetchAllTaskByOwnerID(@RequestParam("ownerId") Long id){
-	return null ;
+//	@GetMapping("/viewTask1")
+//	public CResultListItems fetchAllTaskByOwnerID(@RequestParam("ownerId") Long id){
+//	return null ;
 //	if(session.manger) {
 //		mangerRepository;
 //	}
 //	if(user) {
 //		userRepository;
 //	}
-	}
-	@PutMapping("/AsignTak")
-	public CResultListItems AssignTask(@RequestBody TaskListItems c,List<TaskListUser> u){
-			return null ;
-		}
-	@GetMapping("/getUser")
-	public CResultTaskListUser editUser(){
-		return null ;
-	}
+//	}
+//	@PutMapping("/AsignTak")
+//public CResultListItems AssignTask(@RequestBody TaskListItems c,List<TaskListUser> u){
+		//	return null ;
+	//	}
+//	@GetMapping("/getUser")
+//	public CResultTaskListUser editUser(){
+	//	return null ;
+//	} 
 
 		
 	/******************************************************* naveen **********************************************/
 	
 /*viewProfile*/
 	
-	@GetMapping("/viewProfile")
-		public CResultTaskListUser viewProfile(){
+	//@GetMapping("/viewProfile")
+	/*	public CResultTaskListUser viewProfile(){
 		return null ;
 	}
 	
@@ -72,7 +120,7 @@ public CResultListItems deleteTask(@RequestParam("x") int taskID){
 	
 	/********************AccountSetting**************************/
 	
-	@PostMapping("/ChangePasswordByManager")
+/*	@PostMapping("/ChangePasswordByManager")
 	public CResultTaskListUser ChangeUserDetail(@RequestBody TaskListUser c){
 		
 //		if(isMAnger(session.usetID)) {
@@ -85,7 +133,7 @@ public CResultListItems deleteTask(@RequestParam("x") int taskID){
 		
 		
 		return null ;
-	}
+	}*/
 	
 	
 	
@@ -93,10 +141,10 @@ public CResultListItems deleteTask(@RequestParam("x") int taskID){
 	
 	/**********************ManageTask*****************************/
 	
-	@PutMapping("/CrateTask")
+	/*@PutMapping("/CrateTask")
 	public CResultListItems CreateTask(@RequestBody TaskListItems c){
 		return null ;
-	}
+	}*/
 
 	
 	
@@ -104,21 +152,23 @@ public CResultListItems deleteTask(@RequestParam("x") int taskID){
 	
 	
 	
-	@PutMapping("/addUser")
+//	@PutMapping("/addUser")
 	
-	public CResultTaskListUser addEditUser(@RequestBody TaskListUser c){
-		return null ;
+//	public CResultTaskListUser addEditUser(@RequestBody TaskListUser c){
+//		return null ;
 //		adduser();
-	}
+//	}
 	
 //	@PutMapping("editUser")
 //	public CResultTaskListUser editUser(TaskListUser u){
 //		return null ;
 //	}
 //	
-	@GetMapping("getUser")
-	public CResultTaskListUser getUser(){
-		return null ;
-	}
+	
+//		return null ;
+//	}
 
+   
+   
 }
+
