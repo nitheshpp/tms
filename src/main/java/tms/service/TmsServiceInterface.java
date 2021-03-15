@@ -1,7 +1,24 @@
 package tms.service;
 
-public interface TmsServiceInterface {
+import java.util.List;
+
+
+import tms.model.CResultListItems;
+import tms.model.CResultTaskListUser;
+import tms.model.TaskListItems;
+import tms.model.TaskListUser;
+
+
+
+
+public interface TmsServiceInterface
+{
 	
-//	fetchTaskListForManager()
-//	adduser();
+	CResultListItems createTaskList(TaskListItems c);
+	
+	
+	List<TaskListItems> getAllDetails();
+
+	CResultListItems getOneTask(int userid);
+
 }

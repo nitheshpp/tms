@@ -2,23 +2,134 @@ package tms.controller;
 
 import java.util.List;
 
+
+
+
+
+
 import javax.websocket.server.PathParam;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import tms.ResourceNotFoundException.ResourceNotFoundException;
+import tms.dao.TaskListItemsRepository;
+
 import tms.model.CResultListItems;
 import tms.model.CResultTaskListUser;
 import tms.model.TaskListItems;
 import tms.model.TaskListUser;
+import tms.service.TmsServiceInterface;
+
+
+
 
 @RestController
-public class TMSController {
+public class TMSController 
+{
+	
+	//@Autowired
+	//private TmsServiceInterface s;
+	
+	@Autowired
+	private TaskListItemsRepository tlr;
+	
+	
+	
+	
+	/**********************ManageTask*****************************/
+	
+	// create rest ui -------------------------------------------------------------------------------------	
+		
+	     /*
+		@PutMapping("/createTask")
+		public CResultListItems createTaskList(@RequestBody TaskListItems c)
+		{
+			
+			System.out.println("You can craete task list here ");
+			CResultListItems x = s.createTaskList(c);
+			return x;
+			
+		}
+		
+		*/
+		
+		@PutMapping("/createTask")
+		public TaskListItems createTaskList(@RequestBody TaskListItems c)
+		{
+			
+			System.out.println("You can craete task list here ");
+			return tlr.save(c);
+			
+		}
+
+	
+	
+	
+// getTask rest ui -------------------------------------------------------------------------------------	
+	
+	/*
+	@GetMapping("/getTask")
+	
+	List<TaskListItems> getAllDetails()
+	{
+		List<TaskListItems> l =s.getAllDetails();
+		return l;
+		
+	}
+	*/
+	
+	
+	
+     @GetMapping("/getTask")
+	
+	public List<TaskListItems> getAllDetails()
+	{
+    	 return tlr.findAll();
+		
+	}
+	
+	
+	
+	
+// get particular task using userid rest ui -------------------------------------------------------------------------------------	
+	
+     /*
+	@GetMapping("/selectTask")
+	
+	public CResultListItems getOneTask(@RequestParam("x") int userid)
+	{
+	
+		CResultListItems x = s.getOneTask(userid);
+		return x;
+	
+		
+	}
+	*/
+	
+     @GetMapping("/Task/{userid}")
+public ResponseEntity<TaskListItems> getOneTask(@PathVariable Long userid)
+     {
+ TaskListItems t = tlr.findById(userid).orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + userid));
+return ResponseEntity.ok(t);
+	}
+	
+	
+	
+     
+     
+     
+     
+     
+	
 	/******************************************************* nithesh **********************************************/
 	
 	/*Login*/
@@ -41,7 +152,8 @@ public class TMSController {
 	public CResultListItems AssignTask(@RequestBody TaskListItems c,List<TaskListUser> u){
 			return null ;
 		}
-	@GetMapping("/getUser")
+	
+	@GetMapping("/geetUser")
 	public CResultTaskListUser editUser(){
 		return null ;
 	}
@@ -67,6 +179,9 @@ public CResultListItems deleteTask(@RequestParam("x") int taskID){
 	}
 	
 	/******************************************************* Krati+Ayushi **********************************************/
+	
+	
+	
 	
 	
 	
@@ -100,10 +215,16 @@ public CResultListItems deleteTask(@RequestParam("x") int taskID){
 
 	
 	
+	
+	
 	/**********************ManageUser*****************************/
 	
 	
-	
+	/*
+	  
+	  
+	  
+	  
 	@PutMapping("/addUser")
 	
 	public CResultTaskListUser addEditUser(@RequestBody TaskListUser c){
@@ -120,5 +241,16 @@ public CResultListItems deleteTask(@RequestParam("x") int taskID){
 	public CResultTaskListUser getUser(){
 		return null ;
 	}
+	
+	
+	
+	
+	
+	
+	*/
+	
+	
+	
+	
 
 }

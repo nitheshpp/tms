@@ -30,7 +30,7 @@ public class TaskListStatus implements Serializable {
 
 	public TaskListStatus() {
 		
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public TaskListStatus(String statusDescription) {

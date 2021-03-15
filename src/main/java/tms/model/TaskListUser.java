@@ -1,6 +1,9 @@
 package tms.model;
 
 import java.io.Serializable;
+
+
+
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -28,7 +31,7 @@ public class TaskListUser implements Serializable{
 	
 	public TaskListUser() {
 		
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public TaskListUser(String userName, String passwordHash, long mobileNo,boolean isManager, boolean isAdministrator) {
@@ -86,6 +89,9 @@ public class TaskListUser implements Serializable{
 	public void setAdministrator(boolean isAdministrator) {
 		this.isAdministrator = isAdministrator;
 	}
+
+	
+
 	
 	
 	
