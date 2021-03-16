@@ -42,7 +42,7 @@ public class TMSController {
 	/*viewTask*/
 	
 	
-	@GetMapping("/viewTask1")
+	@GetMapping("/viewTask")
 	public CResultListItems fetchAllTaskByOwnerID(@RequestParam("ownerId") Long id){
 		CResultListItems cri=tmsService.fetchTaskList(id);
 		
