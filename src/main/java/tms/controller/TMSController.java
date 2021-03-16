@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.websocket.server.PathParam;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,23 +15,38 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tms.model.CResultListItems;
+import tms.model.CResultTaskListAssignment;
 import tms.model.CResultTaskListUser;
 import tms.model.TaskListItems;
 import tms.model.TaskListUser;
+import tms.service.TmsServiceInterface;
 
 @RestController
 public class TMSController {
+	
+	@Autowired
+	private TmsServiceInterface tmsService;
+	
+	
 	/******************************************************* nithesh **********************************************/
 	
 	/*Login*/
-	
+	@GetMapping("/Login")
+	public CResultListItems login(@RequestParam("userName") String userName,@RequestParam("password") String password)
+	{
+		CResultListItems cri= tmsService.login(userName,password);
+//		return cri;
+		return cri;
+	}
 	
 	/*viewTask*/
 	
 	
-	@GetMapping("/viewTask1")
+	@GetMapping("/viewTask")
 	public CResultListItems fetchAllTaskByOwnerID(@RequestParam("ownerId") Long id){
-	return null ;
+		CResultListItems cri=tmsService.fetchTaskList(id);
+		
+	return cri ;
 //	if(session.manger) {
 //		mangerRepository;
 //	}
@@ -37,13 +54,26 @@ public class TMSController {
 //		userRepository;
 //	}
 	}
+	
+	
+//	@PutMapping(value="/AsignTak" , consumes = MediaType.APPLICATION_JSON_VALUE)
+//	public CResultListItems AssignTask( @RequestBody TaskListItems listTask,@RequestBody List<TaskListUser> listUser){
+//		CResultListItems cri = new CResultListItems(0, null, "Failed");
+////		tmsService.assignTask
+//		return cri ;
+//		}
+	
+	
 	@PutMapping("/AsignTak")
-	public CResultListItems AssignTask(@RequestBody TaskListItems c,List<TaskListUser> u){
-			return null ;
+	public CResultTaskListAssignment AssignTask(@RequestParam("ownerId") Long ownerId,@RequestParam("taskId") Long taskId){
+		CResultTaskListAssignment cra = new CResultTaskListAssignment();
+		cra=tmsService.assignTask(ownerId,taskId);
+		return cra ;
 		}
-	@GetMapping("/getUser")
+	@GetMapping("/getUser2")
 	public CResultTaskListUser editUser(){
-		return null ;
+		CResultTaskListUser cru=tmsService.getAllUser();
+		return cru ;
 	}
 
 		

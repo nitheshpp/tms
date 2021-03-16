@@ -14,4 +14,6 @@ import tms.model.TaskListItems;
 public interface TaskListItemsRepository extends JpaRepository<TaskListItems, Long>{
 	@Query("from TaskListItems i where i.tlStatusID.StatusDescription='open' and i.tlCategoryID.description='Project1'")
 	List<TaskListItems> findByCategoryStatus();
+
+	List<TaskListItems> findByownerUserId(long ownerUserId);
 }
