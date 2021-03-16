@@ -23,12 +23,19 @@ import tms.model.CResultListItems;
 import tms.model.CResultTaskListUser;
 import tms.model.TaskListItems;
 import tms.model.TaskListUser;
+import tms.service.TmsServiceInterface;
 
 
 @RestController
 public class TMSController {
 	/******************************************************* nithesh **********************************************/
-	private UserRepository userRepository;
+	private TmsServiceInterface s;
+	
+//	private UserRepository userRepository;
+	
+//	private TaskListItemsRepository tasklistitemsrepository;
+	
+	
 	/*Login*/
 	
 	
@@ -60,33 +67,26 @@ public class TMSController {
 /*viewProfile*/
 	
 	@GetMapping("/viewProfile")
-		public CResultTaskListUser viewProfile(){
-		return (CResultTaskListUser) userRepository.findAll() ; 
+	public CResultTaskListUser getUser(@RequestParam("x") long id)
+	{
 		
+		 CResultTaskListUser x = s.getUser(id);
+		return x;
 	}
 	
 	@PostMapping("/updateTask")
-	public ResponseEntity<TaskListUser> UpdateTask(@PathVariable Long id,@RequestBody TaskListUser c){
-		TaskListUser user = userRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("User does not exist with TaskListItems:" + c));
+	public CResultListItems editUser(@RequestBody TaskListItems u){
 		
-		user.setPasswordHash(c.getPasswordHash());
-		user.setMobileNo(c.getMobileNo());
-		user.setUserName(c.getUserName());
-		
-		TaskListUser updateduser = userRepository.save(user);
-		return ResponseEntity.ok(updateduser);
-	}
+		   System.out.println("inside update");
+		   CResultListItems x = s.updateTask(u);
+			return x;
+		}
 	
 	@DeleteMapping("/deleteTask")
-	public ResponseEntity<Map<String, Boolean>> deleteTask(@RequestParam("x") int taskID,@PathVariable Long id){
-		TaskListUser user = userRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + id));
-		
-		userRepository.delete(user);
-		Map<String, Boolean> response = new HashMap<>();
-		response.put("deleted", Boolean.TRUE);
-		return ResponseEntity.ok(response);
+	public CResultListItems deleteTask(@RequestBody TaskListItems u){
+		System.out.println("delete");
+		   CResultListItems x = s.deleteTask(u);
+			return x;
 	}
 	
 	/******************************************************* Krati+Ayushi **********************************************/

@@ -16,8 +16,8 @@ public class TaskListUser implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
 	
-//	@OneToMany(mappedBy = "AssignUserId",targetEntity = TaskListAssignment.class)
-//	private List<TaskListAssignment> tlAssign;
+	@OneToMany(mappedBy = "AssignUserId",targetEntity = TaskListAssignment.class)
+	private List<TaskListAssignment> tlAssign;
 	
 	
 	String userName;
@@ -33,7 +33,7 @@ public class TaskListUser implements Serializable{
 	
 	public TaskListUser(String userName, String passwordHash, long mobileNo,boolean isManager, boolean isAdministrator) {
 		
-//		this.tlAssign = tlAssign;
+		this.tlAssign = tlAssign;
 
 		this.userName = userName;
 		this.passwordHash = passwordHash;
@@ -55,12 +55,12 @@ public class TaskListUser implements Serializable{
 	public void setId(long id) {
 		this.id = id;
 	}
-//	public List<TaskListAssignment> getTlAssign() {
-//		return tlAssign;
-//	}
-//	public void setTlAssign(List<TaskListAssignment> tlAssign) {
-//		this.tlAssign = tlAssign;
-//	}
+	public List<TaskListAssignment> getTlAssign() {
+		return tlAssign;
+	}
+	public void setTlAssign(List<TaskListAssignment> tlAssign) {
+		this.tlAssign = tlAssign;
+	}
 	
 	public String getUserName() {
 		return userName;

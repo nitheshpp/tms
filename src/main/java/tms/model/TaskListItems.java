@@ -19,13 +19,13 @@ public class TaskListItems implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	long id;
 	
-//	@OneToMany(mappedBy = "AssignTaskListId",targetEntity = TaskListAssignment.class)
-//	private List<TaskListAssignment> tlAssign;
+	@OneToMany(mappedBy = "AssignTaskListId",targetEntity = TaskListAssignment.class)
+	private List<TaskListAssignment> tlAssign;
 	
-//	@ManyToOne
-//	@JoinColumn(name="TaskListId")
+	@ManyToOne
+	@JoinColumn(name="TaskListId")
 //	TaskListName tlTaskListID;
-//	
+	
 	
 	long ownerUserId;
 	Date createdDate;

@@ -18,8 +18,8 @@ public class TaskListCategories implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
 	
-//	@OneToMany(mappedBy = "tlCategoryID",targetEntity = TaskListItems.class)
-//	private List<TaskListItems> tlItemCategory;
+	@OneToMany(mappedBy = "tlCategoryID",targetEntity = TaskListItems.class)
+	private List<TaskListItems> tlItemCategory;
 	
 	@Column(unique=true)
 	String description;

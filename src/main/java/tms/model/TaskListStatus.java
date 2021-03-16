@@ -22,8 +22,8 @@ public class TaskListStatus implements Serializable {
 	
 	
 	
-//	@OneToMany(mappedBy = "tlStatusID",targetEntity = TaskListItems.class)
-//	private List<TaskListItems> tlItemStatusId;
+	@OneToMany(mappedBy = "tlStatusID",targetEntity = TaskListItems.class)
+	private List<TaskListItems> tlItemStatusId;
 	
 	@Column(unique=true)
 	String StatusDescription;
@@ -37,7 +37,7 @@ public class TaskListStatus implements Serializable {
 		
 		
 
-//		this.tlItemStatusId = tlItemStatusId;
+		this.tlItemStatusId = tlItemStatusId;
 		StatusDescription = statusDescription;
 	}
 
@@ -51,13 +51,13 @@ public class TaskListStatus implements Serializable {
 
 
 
-//	public List<TaskListItems> getTlItemStatusId() {
-//		return tlItemStatusId;
-//	}
-//
-//	public void setTlItemStatusId(List<TaskListItems> tlItemStatusId) {
-//		this.tlItemStatusId = tlItemStatusId;
-//	}
+	public List<TaskListItems> getTlItemStatusId() {
+		return tlItemStatusId;
+	}
+
+	public void setTlItemStatusId(List<TaskListItems> tlItemStatusId) {
+		this.tlItemStatusId = tlItemStatusId;
+	}
 
 	public String getStatusDescription() {
 		return StatusDescription;
