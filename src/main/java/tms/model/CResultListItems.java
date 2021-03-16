@@ -5,7 +5,7 @@ import java.util.List;
 public class CResultListItems {
 	
 	private int status;
-	private List<TaskListItems> content; 
+	private TaskListItems content; 
 	private String reason;
 	public int getStatus() {
 		return status;
@@ -13,10 +13,10 @@ public class CResultListItems {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public List<TaskListItems> getContent() {
+	public TaskListItems getContent() {
 		return content;
 	}
-	public void setContent(List<TaskListItems> content) {
+	public void setContent(TaskListItems content) {
 		this.content = content;
 	}
 	public String getReason() {
@@ -28,7 +28,7 @@ public class CResultListItems {
 	public CResultListItems() {
 		// TODO Auto-generated constructor stub
 	}
-	public CResultListItems(int status, List<TaskListItems> content, String reason) {
+	public CResultListItems(int status, TaskListItems content, String reason) {
 
 		this.status = status;
 		this.content = content;
