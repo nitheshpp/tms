@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import tms.dao.TaskListAssignTaskRepository;
@@ -18,7 +17,6 @@ import tms.model.TaskListAssignment;
 import tms.model.TaskListAssignmentId;
 import tms.model.TaskListItems;
 import tms.model.TaskListUser;
-
 @Service
 public class TmsServiceImplementation implements TmsServiceInterface {
 
@@ -111,9 +109,4 @@ public class TmsServiceImplementation implements TmsServiceInterface {
 		
 		return cra;
 	}
-
-
-	
-
-	
 }
